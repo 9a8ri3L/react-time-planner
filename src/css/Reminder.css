@@ -1,0 +1,270 @@
+/* Container */
+.reminder-container {
+    width: 100%;
+    flex: 1;
+    margin: auto;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.reminder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--stroke-color);
+}
+
+.reminder-header h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    padding: 0;
+    margin: 0;
+}
+
+.add-reminder-btn {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+}
+
+.add-reminder-btn:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.submit-btn {
+    background-color: var(--start-btn);
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: var(--start-btn-hover);
+}
+
+.cancel-btn {
+    background-color: var(--pause-btn);
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: var(--pause-btn-hover);
+}
+
+.edit-btn {
+    background-color: var(--info-color);
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.delete-btn {
+    background-color: var(--pause-btn);
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: var(--pause-btn-hover);
+}
+
+/* Reminders List */
+.no-reminders {
+    text-align: center;
+    padding: 2rem;
+    color: var(--stroke-color);
+}
+
+.reminders-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.reminder-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.reminder-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reminder-content {
+    flex: 1;
+    width: 100%;
+}
+
+.reminder-main h3 {
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.reminder-description {
+    color: var(--stroke-color);
+    margin-bottom: 2em;
+    max-height: 40px;
+    overflow-y: hidden;
+    font-size: 0.8rem;
+}
+
+.reminder-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2em;
+    padding-top: 0.25em;
+    border-top: 1px solid var(--stroke-color);
+    font-size: 0.8rem;
+}
+
+.reminder-time {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.reminder-countdown {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.reminder-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background: var(--bg-color);
+    color: var(--stroke-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 1px 0 2px rgba(74, 111, 165, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.error {
+    color: var(--danger-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reminder-container {
+        padding: 1rem;
+        width: 90%;
+        margin: 1rem;
+    }
+
+    .reminder-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .add-reminder-btn {
+        width: 100%;
+    }
+
+    .reminder-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .reminder-details {
+        width: 100%;
+        margin: auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        font-size: 0.9rem;
+    }
+
+    .reminder-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .reminder-actions button {
+        flex: 1;
+    }
+}
