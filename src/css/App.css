@@ -85,6 +85,29 @@ html::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
 
+a {
+    text-decoration: none;
+    color: var(--info-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-underline-offset: 8px;
+    text-decoration: underline;
+}
+
+a .credits {
+    color: var(--text-color);
+}
+
+a img {
+    margin-bottom: 2px;
+}
+
 /* Buttons */
 button {
     cursor: pointer;
@@ -104,7 +127,7 @@ button {
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-    padding: 4em 0em 20em 0em !important;
+    padding: 4em 0em 10em 0em !important;
     margin: auto;
     max-width: 1200px;
     width: 100%;
@@ -592,6 +615,24 @@ h3 {
     color: var(--expired-color);
 }
 
+.footer {
+    width: 90dvw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 4em 16px;
+}
+
+.footer p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
 /* Responsive adjustments */
 @media (min-width: 480px) {
     h1,
@@ -626,7 +667,8 @@ h3 {
 
 @media (max-width: 479px) {
     .app {
-        margin-bottom: 30em !important;
+        margin-bottom: 10em !important;
+        padding: 4em 0em 0em !important;
     }
     h1 {
         width: 90%;

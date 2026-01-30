@@ -8,8 +8,31 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
+            injectRegister: false,
+
+            pwaAssets: {
+                disabled: false,
+                config: true,
+            },
+
+            manifest: {
+                name: 'Tima Planner',
+                short_name: 'TP',
+                description: 'Plan your time',
+                theme_color: '#212121',
+            },
+
+            workbox: {
+                globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+                cleanupOutdatedCaches: true,
+                clientsClaim: true,
+            },
+
             devOptions: {
                 enabled: true,
+                navigateFallback: 'index.html',
+                suppressWarnings: true,
+                type: 'module',
             },
         }),
     ],

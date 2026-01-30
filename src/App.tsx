@@ -1,6 +1,7 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
 import { Toaster } from 'sonner';
 import Countdown from './components/Countdown';
+import Footer from './components/Footer';
 import ReminderComponent from './components/Reminder';
 import Stopwatch from './components/Stopwatch';
 import WorldClock from './components/WorldClock';
@@ -8,6 +9,7 @@ import { NotificationSchedulerProvider } from './components/notifications/Notifi
 import './css/App.css';
 import { useClickOutside } from './hooks/useOutsideClick';
 import { defaultAppSounds } from './lib/constants';
+import PWABadge from './pwa/PWABadge';
 
 function App() {
     const prefersDark = window.matchMedia(
@@ -128,82 +130,89 @@ function App() {
     }, []);
 
     return (
-        <main className="app">
-            <button className="theme-toggle" onClick={toggleTheme}>
-                {darkMode ? '☀️' : '🌙'}
-            </button>
-            <button
-                ref={triggerRef}
-                aria-expanded={showSoundControls}
-                aria-controls="sound-controls"
-                className="theme-toggle"
-                onClick={toggleSoundControls}
-                style={{ right: '70px' }}
-            >
-                🔊
-            </button>
-            {showSoundControls && (
-                <div
-                    id="sound-controls"
-                    ref={popupRef}
-                    className="sound-controls"
-                    onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing>
+        <>
+            <main className="app">
+                <button className="theme-toggle" onClick={toggleTheme}>
+                    {darkMode ? '☀️' : '🌙'}
+                </button>
+                <button
+                    ref={triggerRef}
+                    aria-expanded={showSoundControls}
+                    aria-controls="sound-controls"
+                    className="theme-toggle"
+                    onClick={toggleSoundControls}
+                    style={{ right: '70px' }}
                 >
-                    <h4>Sound Settings</h4>
-                    <select
-                        className="sound-select"
-                        value={selectedSound}
-                        onChange={(e) => {
-                            setSelectedSound(e.target.value);
-                        }}
-                        onClick={(e) => e.stopPropagation()} // Additional protection for select
+                    🔊
+                </button>
+                {showSoundControls && (
+                    <div
+                        id="sound-controls"
+                        ref={popupRef}
+                        className="sound-controls"
+                        onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing>
                     >
-                        {defaultAppSounds.map((sound) => (
-                            <option key={sound.url} value={sound.url}>
-                                {sound.label}
-                            </option>
-                        ))}
-                    </select>
-                    <div className="volume-control">
-                        <span>🔉</span>
-                        <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.1"
-                            value={volume}
-                            onChange={(e) =>
-                                setVolume(parseFloat(e.target.value))
-                            }
-                        />
-                        <span>🔊</span>
+                        <h4>Sound Settings</h4>
+                        <select
+                            className="sound-select"
+                            value={selectedSound}
+                            onChange={(e) => {
+                                setSelectedSound(e.target.value);
+                            }}
+                            onClick={(e) => e.stopPropagation()} // Additional protection for select
+                        >
+                            {defaultAppSounds.map((sound) => (
+                                <option key={sound.url} value={sound.url}>
+                                    {sound.label}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="volume-control">
+                            <span>🔉</span>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.1"
+                                value={volume}
+                                onChange={(e) =>
+                                    setVolume(parseFloat(e.target.value))
+                                }
+                            />
+                            <span>🔊</span>
+                        </div>
+                    </div>
+                )}
+
+                <div className="visual-indicator">
+                    Sound:{' '}
+                    {
+                        defaultAppSounds.find((s) => s.url === selectedSound)
+                            ?.label
+                    }{' '}
+                    ({Math.round(volume * 100)}%)
+                </div>
+                <header className="header">
+                    <img src="/favicon.svg" alt="Time Planner" />
+                    <h1>Time Planner</h1>
+                </header>
+                <div className="app-wrapper">
+                    <div className="local">
+                        <WorldClock currentTime={currentTime} />
+                    </div>
+                    <div className="container">
+                        <NotificationSchedulerProvider>
+                            <ReminderComponent audioRef={audioRef} />
+                        </NotificationSchedulerProvider>
+                        <Stopwatch />
+                        <Countdown audioRef={audioRef} />
                     </div>
                 </div>
-            )}
-
-            <div className="visual-indicator">
-                Sound:{' '}
-                {defaultAppSounds.find((s) => s.url === selectedSound)?.label} (
-                {Math.round(volume * 100)}%)
-            </div>
-            <header className="header">
-                <img src="/clock.svg" alt="Time Planner" />
-                <h1>Time Planner</h1>
-            </header>
-            <div className="app-wrapper">
-                <div className="local">
-                    <WorldClock currentTime={currentTime} />
-                </div>
-                <div className="container">
-                    <NotificationSchedulerProvider>
-                        <ReminderComponent audioRef={audioRef} />
-                    </NotificationSchedulerProvider>
-                    <Stopwatch />
-                    <Countdown audioRef={audioRef} />
-                </div>
-            </div>
-            <Toaster theme={`${darkMode ? 'dark' : 'light'}`} />
-        </main>
+                <Toaster theme={`${darkMode ? 'dark' : 'light'}`} />
+                <PWABadge />
+            </main>
+            <Footer />
+        </>
     );
 }
 

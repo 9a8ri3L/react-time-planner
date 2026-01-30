@@ -95,7 +95,7 @@ const ReminderComponent: React.FC<ReminderFC> = ({ audioRef }) => {
             const options = {
                 title: reminder.title,
                 body: reminder.description,
-                icon: '/clock.svg',
+                icon: '/favicon.svg',
             };
 
             const notified = reminder.datetime.getTime() <= Date.now();
