@@ -206,6 +206,7 @@ button {
 }
 
 .container {
+    width: 100%;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -218,8 +219,8 @@ button {
 .timer-container {
     position: relative;
     width: 100%;
-    margin: auto;
-    padding: 1.5rem;
+    margin: 1rem;
+    padding: 1rem;
     border-radius: var(--border-radius);
     background: var(--card-bg);
     box-shadow: var(--box-shadow);
@@ -751,5 +752,9 @@ h3 {
 
     .local-time .time {
         font-size: 2rem;
+    }
+
+    .timer-container {
+        width: 90%;
     }
 }
